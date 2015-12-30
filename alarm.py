@@ -18,6 +18,12 @@ iftttToken = '/with/key/dja7APuAMVvDhA1UZTway-'
 doorOpenUrl = iftttBaseUrl + 'DoorOpened' + iftttToken
 windowOpenUrl = iftttBaseUrl + 'WindowOpened' + iftttToken
 
+# pushover configuration
+def notifyPushover(eventName):
+    message = 'Office ' + eventName
+    response = requests.post('https://api.pushover.net/1/messages.json',data={'token':'a69mmvyRPHWqa1FLUT35xKYmhtx5QA','user':'uiHkY7LC2bw26QMdMByYZnYHr2ZEfS','message':message,'title':'Office Alarm'})
+    print(response)
+
 # assume the door is open so we don't get a false alarm on startup
 doorIsOpen = True;
 windowIsOpen = True;
@@ -28,8 +34,7 @@ while True:
     if io.input(door_pin):
         if not doorIsOpen:
             print("Door Opened")
-            response = requests.get(doorOpenUrl)
-            print(response.text)
+            notifyPushover("DoorOpened")
         doorIsOpen = True
     else:
         doorIsOpen = False
@@ -38,8 +43,7 @@ while True:
     if io.input(window_pin):
         if not windowIsOpen:
             print("Window Opened")
-            response = requests.get(windowOpenUrl)
-            print(response.text)
+            notifyPushover("WindowOpened")
         windowIsOpen = True
     else:
         windowIsOpen = False
