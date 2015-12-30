@@ -2,10 +2,13 @@ import time
 import RPi.GPIO as io
 import requests;
 
+#!/usr/bin/python
+print("Alarm monitor started")
+
 # GPIO configuration
 io.setmode(io.BCM) 
 door_pin = 23
-window_pin = 22
+window_pin = 24
 io.setup(door_pin, io.IN, pull_up_down=io.PUD_UP)  # activate input with PullUp
 io.setup(window_pin, io.IN, pull_up_down=io.PUD_UP)  # activate input with PullUp
 
