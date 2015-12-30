@@ -2,13 +2,14 @@ import time
 import RPi.GPIO as io
 import requests;
 import ConfigParser
+import os
 
 #!/usr/bin/python
 print("Alarm monitor started")
 
 # load config
 config = ConfigParser.ConfigParser()
-config.readfp(open(r'config.txt'))
+config.readfp(open(os.path.dirname(os.path.realpath(__file__)) + '/config.txt'))
 pushoverUser = config.get('pushover', 'user')
 pushoverApplication = config.get('pushover','application')
 
