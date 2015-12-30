@@ -1,0 +1,3 @@
+[pushover]
+user=your user key
+application=your application key
